@@ -1,10 +1,22 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+
+// Config
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration.config';
+
+// Module
 import { NoticeModule } from './notice/notice.module';
 
 @Module({
-  imports: [NoticeModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+    }),
+    NoticeModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
