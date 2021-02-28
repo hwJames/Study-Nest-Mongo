@@ -2,8 +2,23 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+// Config
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration.config';
+
+// Module
+import { NoticeModule } from './notice/notice.module';
+import { MongooseModule } from '@nestjs/mongoose';
+
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+    }),
+    MongooseModule.forRoot('mongodb://localhost:27017/Study-Nest-Mongo'),
+    NoticeModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
