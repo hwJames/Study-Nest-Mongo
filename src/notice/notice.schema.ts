@@ -5,7 +5,7 @@ export type NoticeDocument = Notice & Document;
 
 @Schema()
 export class Notice {
-  @Prop()
+  @Prop({ unique: true })
   no: number;
 
   @Prop()
