@@ -31,7 +31,7 @@ export class NoticeService {
   }
 
   public async findOne(no: number): Promise<NoticeDocument> {
-    const notice = await this.noticeModel.findById({ no: no }).exec();
+    const notice = await this.noticeModel.findOne({ no: no }).exec();
 
     if (!notice) {
       throw new NotFoundException(`Notice #${no} not found`);
@@ -44,7 +44,7 @@ export class NoticeService {
     no: number,
     UpdateNoticeDto: UpdateNoticeDto,
   ): Promise<NoticeDocument> {
-    const existingCustomer = await this.noticeModel.findByIdAndUpdate(
+    const existingCustomer = await this.noticeModel.findOneAndUpdate(
       { no: no },
       UpdateNoticeDto,
     );
@@ -57,7 +57,7 @@ export class NoticeService {
   }
 
   public async remove(no: number): Promise<any> {
-    const deletedCustomer = await this.noticeModel.findByIdAndRemove({
+    const deletedCustomer = await this.noticeModel.findOneAndRemove({
       no: no,
     });
     return deletedCustomer;
