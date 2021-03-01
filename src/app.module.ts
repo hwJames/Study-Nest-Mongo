@@ -16,7 +16,14 @@ import { MongooseModule } from '@nestjs/mongoose';
       isGlobal: true,
       load: [configuration],
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/Study-Nest-Mongo'),
+    MongooseModule.forRootAsync({
+      useFactory: () => ({
+        uri: 'mongodb://localhost:27017/Study-Nest-Mongo',
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+      }),
+    }),
     NoticeModule,
   ],
   controllers: [AppController],
