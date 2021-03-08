@@ -9,6 +9,7 @@ import configuration from './config/configuration.config';
 // Module
 import { NoticeModule } from './notice/notice.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
@@ -23,6 +24,11 @@ import { MongooseModule } from '@nestjs/mongoose';
         useFindAndModify: false,
         useCreateIndex: true,
       }),
+    }),
+    GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql'],
+      debug: true,
+      playground: true,
     }),
     NoticeModule,
   ],
