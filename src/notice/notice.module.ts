@@ -5,10 +5,9 @@ import { NoticeService } from './notice.service';
 import { Notice, NoticeSchema } from './schemas/notice.schema';
 import * as AutoIncrementFactory from 'mongoose-sequence';
 import { Connection } from 'mongoose';
-import { NoticeResolver } from './notice.resolver';
 
 @Module({
-  providers: [NoticeService, NoticeResolver],
+  providers: [NoticeService],
   imports: [
     MongooseModule.forFeatureAsync([
       {

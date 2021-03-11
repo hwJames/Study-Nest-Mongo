@@ -26,7 +26,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       }),
     }),
     GraphQLModule.forRoot({
-      typePaths: ['./**/*.graphql'],
+      autoSchemaFile: true,
       debug: true,
       playground: true,
     }),
