@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 // Winston & Morgan
 import { logger, stream } from './config/winston.config';
@@ -17,6 +18,8 @@ async function bootstrap() {
   });
 
   app.use(morgan('combined', { stream }));
+
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(configuration().port);
 

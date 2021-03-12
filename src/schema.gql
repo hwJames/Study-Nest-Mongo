@@ -3,28 +3,55 @@
 # ------------------------------------------------------
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  no: Float!
+  id: String!
+  pwd: String!
+  nick: String!
+  regist: DateTime!
+  update: DateTime!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
+  createUser(createUserInput: CreateUserInput!): String!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
+  removeUser(id: String!): User!
 }
 
 type Query {
   isPizzaGood: Boolean!
-  user(id: Int!): User!
+  user(id: String!): User!
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  no: Float
+  id: String!
+  pwd: String
+  nick: String
+  regist: DateTime
+  update: DateTime
 }
 
 type User {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """회원 번호"""
+  no: Int!
+
+  """회원 아이디(이메일)"""
+  id: String!
+
+  """회원 비밀번호"""
+  pwd: String!
+
+  """회원 닉네임"""
+  nick: String!
+
+  """회원 가입일"""
+  regist: DateTime!
+
+  """회원 업뎃일"""
+  update: DateTime!
 }
