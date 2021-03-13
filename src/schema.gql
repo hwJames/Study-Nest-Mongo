@@ -37,6 +37,8 @@ input UpdateUserInput {
 }
 
 type User {
+  _id: String!
+
   """회원 번호"""
   no: Int!
 

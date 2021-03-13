@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
 import { NoticeController } from './notice.controller';
 import { NoticeService } from './notice.service';
-import { Notice, NoticeSchema } from './schemas/notice.schema';
-import * as AutoIncrementFactory from 'mongoose-sequence';
-import { Connection } from 'mongoose';
 import { NoticeResolver } from './notice.resolver';
 
+// Mongoose
+import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
+import { Connection } from 'mongoose';
+import * as AutoIncrementFactory from 'mongoose-sequence';
+
+// Model
+import { Notice, NoticeSchema } from './schemas/notice.schema';
 @Module({
   providers: [NoticeService, NoticeResolver],
   imports: [

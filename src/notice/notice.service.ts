@@ -2,11 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-// Schemas
+// Model
 import { Notice, NoticeDocument } from './schemas/notice.schema';
 
 // DTO
-import { PaginationQueryDto } from './dto/pagination-query.dto';
+import { PaginationQueryInput } from '../dto/pagination-query.input';
 import { CreateNoticeDto } from './dto/create-notice.dto';
 import { UpdateNoticeDto } from './dto/update-notice.dto';
 
@@ -23,7 +23,7 @@ export class NoticeService {
   }
 
   public async findAll(
-    paginationQuery: PaginationQueryDto,
+    paginationQuery: PaginationQueryInput,
   ): Promise<NoticeDocument[]> {
     const { limit, offset } = paginationQuery;
 

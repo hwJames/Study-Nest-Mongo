@@ -1,7 +1,12 @@
 import { ObjectType, Field, Int, GraphQLISODateTime } from '@nestjs/graphql';
+import { SchemaFactory } from '@nestjs/mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
 @ObjectType()
 export class User {
+  @Field(() => String)
+  _id: MongooseSchema.Types.ObjectId;
+
   @Field(() => Int, { description: '회원 번호' })
   no: number;
 
@@ -20,3 +25,7 @@ export class User {
   @Field(() => GraphQLISODateTime, { description: '회원 업뎃일' })
   update: Date;
 }
+
+export type UserDocument = User & Document;
+
+export const UserSchema = SchemaFactory.createForClass(User);

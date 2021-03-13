@@ -14,9 +14,9 @@ import {
 import { NoticeService } from './notice.service';
 
 // DTO
+import { PaginationQueryInput } from '../dto/pagination-query.input';
 import { CreateNoticeDto } from './dto/create-notice.dto';
 import { UpdateNoticeDto } from './dto/update-notice.dto';
-import { PaginationQueryDto } from './dto/pagination-query.dto';
 @Controller('api/v1/notice')
 export class NoticeController {
   constructor(private noticeService: NoticeService) {}
@@ -24,7 +24,7 @@ export class NoticeController {
   @Get()
   public async getAllNotice(
     @Res() res,
-    @Query() paginationQuery: PaginationQueryDto,
+    @Query() paginationQuery: PaginationQueryInput,
   ) {
     const noticeList = await this.noticeService.findAll(paginationQuery);
     return res.status(HttpStatus.OK).json(noticeList);
