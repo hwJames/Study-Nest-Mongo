@@ -13,7 +13,6 @@ import configuration from './config/configuration.config';
 import database from './config/database.config';
 
 // Module
-import { NoticeModule } from './notice/notice.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -33,7 +32,6 @@ import { UserModule } from './user/user.module';
       debug: true,
       playground: true,
     }),
-    NoticeModule,
     UserModule,
   ],
   controllers: [AppController],

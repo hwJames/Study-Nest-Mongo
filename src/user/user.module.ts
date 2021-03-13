@@ -3,7 +3,9 @@ import { UserService } from './user.service';
 import { UserResolver } from './user.resolver';
 
 // Mongoose
-import { MongooseModule } from '@nestjs/mongoose';
+import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
+import { Connection } from 'mongoose';
+import * as AutoIncrementFactory from 'mongoose-sequence';
 
 // Model
 import { User, UserSchema } from './entities/user.entity';
@@ -11,7 +13,19 @@ import { User, UserSchema } from './entities/user.entity';
 @Module({
   providers: [UserResolver, UserService],
   imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeatureAsync([
+      {
+        name: User.name,
+        useFactory: (connection: Connection) => {
+          const schema = UserSchema;
+          const AutoIncrement = AutoIncrementFactory(connection);
+
+          schema.plugin(AutoIncrement, { inc_field: 'us_no' });
+          return schema;
+        },
+        inject: [getConnectionToken()],
+      },
+    ]),
   ],
 })
 export class UserModule {}
