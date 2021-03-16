@@ -6,7 +6,7 @@ import {
 } from 'nest-winston';
 import * as moment from 'moment';
 
-const logDir = join(__dirname, '..', '..', 'logs');
+const logDir = join(__dirname, '..', 'logs');
 
 const consoleTransport = new transports.Console({
   format: format.combine(
