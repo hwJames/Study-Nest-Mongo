@@ -4,7 +4,7 @@ import {
   WinstonModule,
   utilities as nestWinstonModuleUtilities,
 } from 'nest-winston';
-import * as moment from 'moment';
+import * as winstonDaily from 'winston-daily-rotate-file';
 
 const logDir = join(__dirname, '..', 'logs');
 
@@ -15,8 +15,9 @@ const consoleTransport = new transports.Console({
   ),
 });
 
-const infoTransport = new transports.File({
-  filename: 'info-' + moment().format('YYYY-MM-DD') + '.log',
+const infoTransport = new winstonDaily({
+  filename: 'info-%DATE%.log',
+  datePattern: 'YYYY-MM-DD',
   dirname: join(logDir, 'info'),
   level: 'info',
   format: format.combine(
@@ -25,8 +26,9 @@ const infoTransport = new transports.File({
   ),
 });
 
-const errorTransport = new transports.File({
-  filename: 'error-' + moment().format('YYYY-MM-DD') + '.log',
+const errorTransport = new winstonDaily({
+  filename: 'error-%DATE%.log',
+  datePattern: 'YYYY-MM-DD',
   dirname: join(logDir, 'error'),
   level: 'error',
   format: format.combine(
